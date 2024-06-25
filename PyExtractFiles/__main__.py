@@ -1,23 +1,34 @@
 import tkinter as tk
+from tkinter import messagebox
 from text import text
 import os
 import shutil
 
 
 class SetUpGUI:
+    """
+    The class that contains the whole GUI.
+
+    **IMPORTANT**: If two or more files have the same name, the copying process will start numbering the files
+    """
     def __init__(self) -> None:
+
         self.window = tk.Tk()
         self.window.geometry('700x700')
         self.window.title('Extract files')
+
         self.setup()
         self.window.mainloop()
 
     def setup(self):
+        """
+        Defines and sets-up all the widgets being displayed on the GUI
+        """
         # Backgroung
         self.background = '#333333'
         self.window.configure(bg=self.background)
 
-        # Frame to center everything
+        # Frame (used to center everything)
         self.frame = tk.Frame(bg=self.background)
         self.frame.pack()
 
@@ -40,12 +51,12 @@ class SetUpGUI:
         # Entry bars
         self.source = tk.Label(self.frame, text="source_directory")
         self.source.grid(row=2, column=0)
-        self.source_entry = tk.Entry(self.frame)
+        self.source_entry = tk.Entry(self.frame, textvariable=tk.StringVar(value="/Users/lodi/Desktop/adam/data_extraction/OGRAPH"))
         self.source_entry.grid(row=2, column=1, columnspan=2, sticky='news')
 
         self.target = tk.Label(self.frame, text="target_directory")
         self.target.grid(row=3, column=0)
-        self.target_entry = tk.Entry(self.frame)
+        self.target_entry = tk.Entry(self.frame, textvariable=tk.StringVar(value="/Users/lodi/Desktop/untitled_folder"))
         self.target_entry.grid(row=3, column=1, columnspan=2, sticky='news')
 
         self.default_extension = tk.StringVar(value='.pdf')
@@ -55,24 +66,47 @@ class SetUpGUI:
         self.file_extension_entry.grid(row=4, column=1, columnspan=2, sticky='news')
 
         # Command button
-        self.button = tk.Button(self.frame, text="Extract files", command=self.extraction)
+        self.button = tk.Button(self.frame, text="Extract files", command=self.copy)
         self.button.grid(row=5, column=0, columnspan=3, sticky='news', pady=20)
 
-    def extraction(self):
+    def copy(self):
+        """
+        The copying process
+        """
+        self.copied_file_count = 0
+        self.name_dic = {}
+
         self.source_directory = self.source_entry.get()
         self.target_directory = self.target_entry.get()
         self.file_extension = self.file_extension_entry.get()
 
-        for root, dirs, files in os.walk(self.source_directory):
-            for name in files:
-                self.original_file_path = os.path.join(root, name)
-                self.copied_file_path = os.path.join(self.target_directory, name)
-                self.make_copy(
-                )
+        for self.root, dirs, files in os.walk(self.source_directory):
+            for self.name in files:
+
+                self.validate_name()
+
+                self.make_copy()
 
     def make_copy(self):
-        if self.copied_file_path.endswith(self.file_extension):
+        """
+        Makes the copy of the file
+        """
+        if self.name.endswith(self.file_extension):
+            if self.name not in self.name_dic.keys(): self.name_dic[self.name] = 0
+
             shutil.copyfile(self.original_file_path, self.copied_file_path)
+
+    def validate_name(self):
+        """
+        Makes sure no two files have the same name
+        """
+        self.original_file_path = os.path.join(self.root, self.name)
+
+        if self.name in self.name_dic.keys():
+            self.name_dic[self.name] += 1
+            self.name = self.name.replace(self.file_extension, f"{self.name_dic[self.name]} {self.file_extension}")
+
+        self.copied_file_path = os.path.join(self.target_directory, self.name)
 
 
 def main():
