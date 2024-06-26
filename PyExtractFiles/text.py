@@ -8,22 +8,22 @@ text = """
     2. The path to the directory where you want to store your copies
         (this is `target_directory`). You need to create this folder before running
         the code; it will not be created automatically.
-    3. The extensio of the files you want to copy. The default is .pdf
+    3. The extension of the files you want to copy. The default is .pdf
 
     **WARNING:** To avoid errors during execution, ensure that `target_directory`
         is NOT within `source_directory`.
 
     Example of a good directory structure:
     - root_directory
-    - source_directory
-        - some files
-    - target_directory
+        - source_directory
+            - some files
+        - target_directory
 
     Example of a problematic directory structure:
     - root_directory
-    - source_directory
-        - some files
-        - target_directory <<< !Problematic!
+        - source_directory
+            - some files
+            - target_directory <<< !Problematic!
 
     **WARNING 2**: Be careful not to include the 'allfigures_source',
         'OGRAPH_extracted', and 'OGRAPH directories', as they may contain some PDF

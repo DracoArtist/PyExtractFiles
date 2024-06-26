@@ -51,12 +51,12 @@ class SetUpGUI:
         # Entry bars
         self.source = tk.Label(self.frame, text="source_directory")
         self.source.grid(row=2, column=0)
-        self.source_entry = tk.Entry(self.frame, textvariable=tk.StringVar(value="/Users/lodi/Desktop/adam/data_extraction/OGRAPH"))
+        self.source_entry = tk.Entry(self.frame, textvariable=tk.StringVar())
         self.source_entry.grid(row=2, column=1, columnspan=2, sticky='news')
 
         self.target = tk.Label(self.frame, text="target_directory")
         self.target.grid(row=3, column=0)
-        self.target_entry = tk.Entry(self.frame, textvariable=tk.StringVar(value="/Users/lodi/Desktop/untitled_folder"))
+        self.target_entry = tk.Entry(self.frame, textvariable=tk.StringVar())
         self.target_entry.grid(row=3, column=1, columnspan=2, sticky='news')
 
         self.default_extension = tk.StringVar(value='.pdf')
