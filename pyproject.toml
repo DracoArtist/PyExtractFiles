@@ -1,3 +1,26 @@
 [build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyExtractFiles_DracoArtist"
+version = "0.0.1"
+authors = [
+  { name="DracoArtist", email="adam.zolnai91@gmail.com" },
+]
+description = "A simple package used to copy files from a directory to another one, along with a GUI to support this"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage = "https://github.com/DracoArtist/PyExtractFiles"
+
+
+-------
+[build-system]
 build-backend = "setuptools.build_meta"
 requires = ["setuptools", "wheel"]
